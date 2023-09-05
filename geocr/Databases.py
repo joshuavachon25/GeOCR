@@ -13,7 +13,7 @@ class Databases:
         self.init_db()
 
     def add_to_sources(self, data, view):
-        self.dbmaster.execute(''' INSERT INTO sources(path,name,zones,project,params,tags,status,year) VALUES(?,?,?,?,?,?,?,?)''', data)
+        self.dbmaster.execute(''' INSERT INTO sources(path,name,zones,project,params,tags,status,year,width,height) VALUES(?,?,?,?,?,?,?,?,?,?)''', data)
         self.db.commit()
         self.refresh_table_sources(view)
 
@@ -28,7 +28,7 @@ class Databases:
     def refresh_table_sources(self, view):
         self.dbmaster.execute(''' SELECT *, oid FROM sources''')
         results = self.dbmaster.fetchall()
-        view.refresh_table(results, (8, 1, 3, 6, 5))
+        view.refresh_table(results, (10, 1, 3, 6, 5))
 
     def get_table(self):
         pass
@@ -45,7 +45,9 @@ class Databases:
                 params TEXT,
                 tags TEXT,
                 status TEXT,
-                year INTEGER
+                year INTEGER,
+                width INTEGER,
+                height INTEGER
             )
             """)
 

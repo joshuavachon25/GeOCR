@@ -2,8 +2,10 @@ import os
 import tkinter as tk
 import webbrowser
 from tkinter import ttk
+
+import tkintermapview
+import helpers.ImageHelper as ImageHelper
 import ttkbootstrap as tkb
-from helpers.ImageHelper import *
 from PIL import Image, ImageTk
 
 
@@ -28,13 +30,13 @@ class Archives(tkb.Toplevel):
 
         self.viewer = ArchivesViewer(self, self.item)
         self.viewer.grid(column=0, row=0, rowspan=3, sticky='nsew', padx=10, pady=10)
-        show_preview(self.viewer, self.item[0], mode='canvas')
-        self.zone_rect = self.viewer.img.create_polygon([(0, 0), (0, 0), (0, 0), (0, 0)], outline='blue', tags='currentZone')
+        ImageHelper.show_preview(self.viewer, self.item[0], mode='canvas')
 
         self.zones_editor = tkb.Frame(self)
         self.zones_editor.grid(column=1, row=0, rowspan=3, sticky='nsew', padx=10, pady=10)
 
         self.zones = Zones(self.item[3])
+        self.zone_rect = self.viewer.img.create_polygon([(0, 0), (0, 0), (0, 0), (0, 0)], outline='blue', tags='currentZone')
 
         self.zones_details = tkb.Notebook(self.zones_editor)
         self.zones_details.pack(expand=True, fill='both')

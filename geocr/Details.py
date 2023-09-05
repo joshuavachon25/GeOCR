@@ -7,7 +7,7 @@ import ttkbootstrap as tkb
 
 
 class Details(tkb.Labelframe):
-    def __init__(self, parent, add_to_sources, search_in_db):
+    def __init__(self, parent, add_archive_callback, search_in_db):
         super().__init__(parent, text='Propriétés')
         self.src = None
         self.filename = None
@@ -24,7 +24,7 @@ class Details(tkb.Labelframe):
         action_list.pack(fill='x', padx=10, pady=(0, 10))
         button_open = tkb.Button(action_list, text="Ouvrir le fichier", command=lambda: self.open_image())
         button_open.pack(side="left")
-        self.button_add = tkb.Button(action_list, text="Ajouter à GeOCR", command=lambda: self.add_to_geocr(add_to_sources))
+        self.button_add = tkb.Button(action_list, text="Ajouter aux archives", command=lambda: self.add_archive(add_archive_callback))
         self.button_add.pack(side="right")
 
     def show_details(self, path):
@@ -38,11 +38,18 @@ class Details(tkb.Labelframe):
         if self.image is not None:
             self.image.show()
 
-    def add_to_geocr(self, callback):
-        nom = tkb.dialogs.dialogs.Querybox.get_string(prompt="Nommez cette source", title="Nom de l'archive")
-        print(nom)
-        if nom is not None:
-            default_values = (self.path, nom, '', '', '', '', 'NOUVEAU', 0)
+    def add_archive(self, callback):
+        name = tkb.dialogs.dialogs.Querybox.get_string(prompt="Nommez cette source", title="Nom de l'archive")
+        print(self.image.info)
+        if name is not None:
+            path = self.path
+            zones = f"1; Zone 1; 0, 0, {self.image.width}, 0, {self.image.height}, {self.image.width}, 0, {self.image.height}"
+            project = ""
+            params = ""
+            tags = ""
+            status = "NOUVEAU"
+            year = 0
+            default_values = (path, name, zones, project, params, tags, status, year, self.image.width, self.image.height)
             callback(default_values)
 
     def clear_properties(self):

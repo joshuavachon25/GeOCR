@@ -1,4 +1,6 @@
 from geocr.Archives import Archives
+from geocr.ArchivesModule import ArchivesWindow
+from geocr.Test import Test
 from geocr.DataTable import DataTable
 import ttkbootstrap as tkb
 
@@ -20,4 +22,4 @@ class DBViewer(tkb.Labelframe):
         else:
             self.previous_selection = selected_items
             item_values = self.db_view.table.view.item(selected_items, 'values')
-            Archives(self.parent, self.DB, item_values[0])
+            Test(self.parent, self.DB, item_values[0])

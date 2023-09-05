@@ -32,7 +32,7 @@ class App(tkb.Window):
         self.preview = Preview(self)
         self.preview.grid(column=1, row=1, sticky='nsew', padx=10, pady=10)
 
-        self.exif = Details(self, add_to_sources=self.add_to_sources, search_in_db=self.search_in_db)
+        self.exif = Details(self, add_archive_callback=self.add_to_sources, search_in_db=self.search_in_db)
         self.exif.grid(column=2, row=1, sticky='nsew', padx=10, pady=10)
 
         self.db = DBViewer(self, self.DB)

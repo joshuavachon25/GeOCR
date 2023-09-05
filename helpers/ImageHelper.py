@@ -26,10 +26,9 @@ def set_image(frame, image, path, mode):
         frame.img.configure(image=imgtk)
         frame.img.image = imgtk
     else:
-        frame.img.image = imgtk
+        frame.canvas.image = imgtk
         f_w = frame.winfo_width()
         f_h = frame.winfo_height()
-        print(f_w)
-        frame.img.create_image(f_w/2, f_h/2, anchor='center', image=imgtk)
+        frame.canvas.create_image(0, 0, anchor='nw', image=imgtk)
         frame.w = w
         frame.h = h

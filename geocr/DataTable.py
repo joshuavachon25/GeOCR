@@ -19,6 +19,7 @@ class DataTable(tkb.Frame):
 
     def refresh_table(self, results, cols):
         self.table.delete_rows()
+        print(results)
         for result in results:
             values = []
             for c in cols:
